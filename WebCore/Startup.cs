@@ -49,10 +49,10 @@ namespace WebCore
             //services.AddSingleton<IConfiguration>(Configuration);
             
             // Aggiungo il servizio MusicAlbumRepository con lifetime Singleton
-            // services.AddSingleton(new MusicAlbumRepository());
+            services.AddSingleton(new MusicAlbumRepository());
 
             // Aggiungo il servizio MusicAlbumRepository con lifetime Transient
-            services.AddTransient(typeof(MusicAlbumRepository));
+            //services.AddTransient(typeof(MusicAlbumRepository));
 
             // Add framework services.
             services.AddMvc();
