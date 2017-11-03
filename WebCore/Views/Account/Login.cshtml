@@ -1,0 +1,17 @@
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+<form asp-action="Login" method="post">
+    <input type="hidden" value=""/>
+    <div>Username: <input type="text" name="username"/>
+        <br/><br/>
+        Password: <input type="text" name="password"/>
+        <br/><br/>
+        <input type="submit" value="Login"/>
+    </div>    
+</form>

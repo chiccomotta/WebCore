@@ -1,0 +1,35 @@
+
+@model List<MusicAlbum>
+
+@{
+    ViewData["Title"] = "Music List";
+}
+
+<h2>Music Albums List</h2>
+
+@{
+    StringBuilder sb = new StringBuilder();
+    sb.Append("ciao");
+    sb.Append(" sono io");
+    <h2>sb.ToString();</h2>
+}
+
+<p>
+    <table class="table table-bordered table-striped">
+        @foreach (var album in Model)
+        {
+            <tr>
+                <td>@album.Artist</td>
+                <td>@album.Name</td>
+                <td>@album.ReleaseDate</td>
+            </tr>
+        }
+    </table>
+    
+    <br />
+
+    <div>
+        <a class="btn btn-default" role="button" asp-controller="MusicAlbum" 
+           asp-action="Change">Cambia Release Date</a>        
+    </div>
+</p>
