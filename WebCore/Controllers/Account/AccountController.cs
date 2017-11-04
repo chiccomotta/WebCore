@@ -23,8 +23,9 @@ namespace WebCore.Controllers.Account
             return View();
         }
 
-        [HttpPost]       
-        public async Task<IActionResult> Login([FromQuery] LoginModel loginModel,
+        [HttpPost]     
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginModel loginModel,
             [FromHeader] string secretCode)
         {
             if (!ModelState.IsValid)

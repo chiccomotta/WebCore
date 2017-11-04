@@ -1,4 +1,6 @@
+@model WebCore.Models.LoginModel
 @using Microsoft.AspNetCore.Http
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
 
 @{
     ViewData["Title"] = "Login";
@@ -6,12 +8,21 @@
 
 <h2>Login</h2>
 
-<form asp-action="Login" method="post">
-    <input type="hidden" value=""/>
+<form asp-action="Login" method="post" asp-antiforgery="true">    
+    
+    <!-- Model summaries validation-->
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
     <div>Username: <input type="text" name="username"/>
         <br/><br/>
-        Password: <input type="text" name="password"/>
+        Password: <input type="password" name="Password"/>
+    
         <br/><br/>
+        Conferma password: <input type="password" name="ConfirmPassword"/>
+        <br/>
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        <br/><br/>
+    
         <input type="submit" value="Login"/>
     </div>    
 </form>

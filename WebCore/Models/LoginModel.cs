@@ -14,8 +14,12 @@ namespace WebCore.Models
         [Required]      
         public string Username { get; set; } = "default";
 
-        [Required]
+        [Required]        
         public string Password { get; set; }
+
+        [Required]
+        [Compare("Password", ErrorMessage = "Password e password di conferma devono coincidere")]
+        public string ConfirmPassword { get; set; }
 
         public string GetFullName() => Username;
     }
