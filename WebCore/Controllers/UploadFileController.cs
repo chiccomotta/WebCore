@@ -14,12 +14,15 @@ namespace WebCore.Controllers
     {
         private IHostingEnvironment enviroment;
         private readonly ConnectionString connectionString;
+        private readonly RemoteCredentials remoteCredentials;
 
 
-        public UploadFileController(IHostingEnvironment env, IOptions<ConnectionString> connString, MusicAlbumRepository musicRepository)
+        public UploadFileController(IHostingEnvironment env, IOptions<ConnectionString> connString, 
+            MusicAlbumRepository musicRepository, IOptions<RemoteCredentials> remoteCredentials)
         {
             this.enviroment = env;
             this.connectionString = connString.Value;
+            this.remoteCredentials = remoteCredentials.Value;
 
 
             Debug.WriteLine(connectionString.ServerInfo.IP);

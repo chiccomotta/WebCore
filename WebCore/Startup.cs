@@ -36,9 +36,12 @@ namespace WebCore
 
             //Configure Option using Extensions method  
             services.Configure<ConnectionString>(Configuration.GetSection("ConnectionString"));
+            
+            //Configure Option using Extensions method  
+            services.Configure<RemoteCredentials>(Configuration.GetSection("RemoteCredentials"));
 
             //services.AddSingleton<IConfiguration>(Configuration);
-            
+
             // Aggiungo il servizio MusicAlbumRepository con lifetime Singleton
             services.AddSingleton(new MusicAlbumRepository());
 
