@@ -12,10 +12,10 @@ namespace WebCore.Controllers
 {
     public class UploadFileController : Controller
     {
-        private IHostingEnvironment enviroment;
+        private readonly IHostingEnvironment enviroment;
         private readonly ConnectionString connectionString;
         private readonly RemoteCredentials remoteCredentials;
-
+    
 
         public UploadFileController(IHostingEnvironment env, IOptions<ConnectionString> connString, 
             MusicAlbumRepository musicRepository, IOptions<RemoteCredentials> remoteCredentials)
