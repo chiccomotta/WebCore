@@ -13,14 +13,18 @@
 
     <div>Username: <input type="text" name="username"/>
         <br/><br/>
-        Password: <input type="password" name="Password"/>
+        <label for="Password">Password</label>
+        <input type="password" name="Password" id="Password"/>
     
         <br/><br/>
-        Conferma password: <input type="password" name="ConfirmPassword"/>
+        <label for="ConfirmPassword">Conferma Password</label>
+        <input type="password" name="ConfirmPassword" id="ConfirmPassword"/>
         <br/>
         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
         <br/><br/>
     
+        <input type="hidden" value="@ViewData["code"]" name="code"/>
+
         <input type="submit" value="Login"/>
     </div>    
 </form>

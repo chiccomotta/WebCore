@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:60599/",
+      "applicationUrl": "http://localhost:5000",
       "sslPort": 0
     }
   },
@@ -13,7 +13,7 @@
       "launchBrowser": true,
       "environmentVariables": {
         "TEST_VAR1": "Hello Cristiano",
-        "DeveloperName": "Andrea Gugiatti",
+        "DeveloperName": "Cristiano Motta",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },

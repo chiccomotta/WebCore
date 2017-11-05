@@ -14,15 +14,15 @@ namespace WebCore.Controllers.Account
 
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string code)
         {
+            ViewData["code"] = code;
             return View();
         }
 
         [HttpPost]     
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginModel loginModel,
-            [FromHeader] string secretCode)
+        public async Task<IActionResult> Login(LoginModel loginModel, string code)
         {
             if (!ModelState.IsValid)
                 return View();
