@@ -7,8 +7,7 @@ namespace WebCore.Models
         [Required]
         public string Password { get; set; }
 
-        [Required]
-        [Display(Name = "Conferma Password")]
+        [Required]        
         [Compare("Password", ErrorMessage = "Password e password di conferma devono coincidere")]
         public string ConfirmPassword { get; set; }        
     }
