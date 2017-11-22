@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -50,6 +51,15 @@ namespace WebCore
 
             // Add framework services.
             services.AddMvc();
+
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.CookieHttpOnly = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,6 +94,7 @@ namespace WebCore
             //    await context.Response.WriteAsync("Sono il II custom Middleware");
             //    // non chiamo il metodo next per cui ho finito la pipeline e torno indietro
             //});
+            app.UseSession();
 
             Debug.WriteLine(Configuration["Developer:Name"]);
             Debug.WriteLine(Configuration["Developer:Surname"]);

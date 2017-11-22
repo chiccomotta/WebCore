@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.Chunks.Generators;
 using WebCore.Models;
@@ -69,6 +70,20 @@ namespace WebCore.Controllers
         public string ApiTest()
         {
             return "Ciao a tutti";
+        }
+
+        [Route("api/save")]
+        public string save()
+        {
+            HttpContext.Session.SetString("Utente", "CRISTIANO MOTTA");
+            return "";
+        }
+
+        [Route("api/read")]
+        public string read()
+        {
+            var t = HttpContext.Session.GetString("Utente");
+            return t;
         }        
     }
 }
