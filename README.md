@@ -7,6 +7,7 @@ Progetto ASP.NET Core 1.1 utilizzato per il corso ASP.NET CORE. Sono presenti di
   - Views
   - Sessioni
   - Tag Helper
+  - Cookie Authentication
   - IOptions
   - Razor syntax
 
