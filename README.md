@@ -12,4 +12,3 @@ Progetto ASP.NET Core 1.1 utilizzato per il corso ASP.NET CORE. Sono presenti di
   - Razor syntax
 
 **TODO: aggiornare al framework 2.0**
-
