@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using System.IO;
+using Microsoft.AspNetCore.DataProtection;
 using WebCore.Models;
 using WebCore.Services;
 
@@ -51,7 +53,7 @@ namespace WebCore
 
             // Add framework services.
             services.AddMvc();
-
+            
             services.AddDistributedMemoryCache();
 
             services.AddSession(options =>
@@ -60,6 +62,9 @@ namespace WebCore
                 options.IdleTimeout = TimeSpan.FromMinutes(20);
                 options.CookieHttpOnly = true;
             });
+
+            services.AddDataProtection()
+                .PersistKeysToFileSystem(new DirectoryInfo(@"C:\encryptkeys"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -104,8 +109,7 @@ namespace WebCore
 
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
+                app.UseDeveloperExceptionPage();               
             }
             else
             {

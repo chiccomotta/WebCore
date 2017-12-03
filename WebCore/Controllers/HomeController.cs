@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,16 @@ using WebCore.Models;
 namespace WebCore.Controllers
 {
     public class HomeController : Controller
-    {      
+    {
+
+        protected readonly IDataProtector protector;
+
+        public HomeController(IDataProtectionProvider provider)
+        {
+            protector = provider.CreateProtector("WebCore.HomeController.v1");
+        }
+
+        
         public ViewResult Index()
         {
             return View();
@@ -84,6 +94,21 @@ namespace WebCore.Controllers
         {
             var t = HttpContext.Session.GetString("Utente");
             return t;
-        }        
+        }
+
+        [Route("api/post")]
+        [HttpPost]
+        public string post([FromBody]Customer customer)
+        {
+            // protect the payload
+            string protectedPayload = protector.Protect("ciccio");
+            Debug.WriteLine($"Protect returned: {protectedPayload}");
+
+            // unprotect the payload
+            string unprotectedPayload = protector.Unprotect(protectedPayload);
+            Debug.WriteLine($"Unprotect returned: {unprotectedPayload}");
+
+            return unprotectedPayload;
+        }
     }
 }
