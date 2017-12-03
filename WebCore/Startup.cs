@@ -63,8 +63,10 @@ namespace WebCore
                 options.CookieHttpOnly = true;
             });
 
+            var debug_string = Configuration["MasterKeyShare"];
+            
             services.AddDataProtection()
-                .PersistKeysToFileSystem(new DirectoryInfo(@"C:\encryptkeys"));
+                .PersistKeysToFileSystem(new DirectoryInfo(Configuration["MasterKeyShare"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
