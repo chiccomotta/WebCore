@@ -6,7 +6,7 @@ Scaffold-DbContext "Server=khors;Database=LeMA;Trusted_Connection=True;Applicati
 -OutputDir Models -Context "LeMAContext" -StartupProject "Repower.LeMA.API"
 ```
 
-** I packages NuGet necessari sono i seguenti: **
+**I packages NuGet necessari sono i seguenti:**
 <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
@@ -15,9 +15,10 @@ Scaffold-DbContext "Server=khors;Database=LeMA;Trusted_Connection=True;Applicati
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.0" />   
 </ItemGroup>
 
-Se l'operazione va a buon fine nella folder Models del progetto verranno create le classi entità e il file LeMAContext.
+Se l'operazione va a buon fine nella folder Models del progetto verranno create le classi entità e il file LeMAContext.cs.
 
-N.B.
+**N.B.**
+
 1) In caso di modifiche alla base dati, per rigenerare le classi e sovrascriverle, appendere il flag "-f" al comando Scaffold-DbContext precedente
 2) Il flag -StartupProject è necessario perchè bisogna specificare un file eseguibile (LeMA.DAL è una class library)
 3) La classe LeMAContext generata configura una proprietà dell'entità Activations come colonna calcolata andando in errore. Per il momento ho commentato quella riga in quanto non necessaria (ci pensa SQL Server a valorizzare il contenuto della colonna).
