@@ -1,10 +1,10 @@
-Per generare le classi .cs di entità da un database aprire la Package Manager Console, 
+Per generare le classi .cs di entità da un database aprire la *Package Manager Console*, 
 impostare come Default Project il progetto al quale si vuole aggiungere le classi e inserire il seguente comando (ovviamente specificando la Connection String adeguata):
 
 Scaffold-DbContext "Server=khors;Database=LeMA;Trusted_Connection=True;Application Name=Repower.LeMA" Microsoft.EntityFrameworkCore.SqlServer
 -OutputDir Models -Context "LeMAContext" -StartupProject "Repower.LeMA.API"
 
-I packages NuGet necessari sono i seguenti:
+### I packages NuGet necessari sono i seguenti:
 <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
