@@ -8,6 +8,7 @@ Scaffold-DbContext "Server=khors;Database=LeMA;Trusted_Connection=True;Applicati
 ```
 
 **I packages NuGet necessari sono i seguenti:**
+```xml
 <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
@@ -15,6 +16,7 @@ Scaffold-DbContext "Server=khors;Database=LeMA;Trusted_Connection=True;Applicati
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" />  
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.0" />   
 </ItemGroup>
+```
 
 Se l'operazione va a buon fine nella folder Models del progetto verranno create le classi entità e il file LeMAContext.cs.
 
