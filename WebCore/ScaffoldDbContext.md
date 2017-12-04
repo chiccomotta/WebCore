@@ -6,7 +6,7 @@ Scaffold-DbContext "Server=khors;Database=LeMA;Trusted_Connection=True;Applicati
 -OutputDir Models -Context "LeMAContext" -StartupProject "Repower.LeMA.API"
 ```
 
-### I packages NuGet necessari sono i seguenti:
+** I packages NuGet necessari sono i seguenti: **
 <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
