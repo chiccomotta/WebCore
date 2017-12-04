@@ -18,7 +18,7 @@ Scaffold-DbContext "Server=khors;Database=LeMA;Trusted_Connection=True;Applicati
 </ItemGroup>
 ```
 
-Se l'operazione va a buon fine nella folder Models del progetto verranno create le classi entità e il file LeMAContext.cs.
+Se l'operazione va a buon fine nella folder **Models** del progetto verranno create le classi entità e il file LeMAContext.cs.
 
 **N.B.**
 
