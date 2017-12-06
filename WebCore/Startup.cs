@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.IO;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.DataProtection;
 using WebCore.Models;
 using WebCore.Services;
@@ -122,14 +123,14 @@ namespace WebCore
             app.UseStaticFiles();
 
             // Cookie authentication: da mettere prima di UseMvc!
-            app.UseCookieAuthentication(new CookieAuthenticationOptions()
-            {
-                AuthenticationScheme = "MyApplicationAuth",
-                LoginPath = new PathString("/Account/Login/"),
-                AccessDeniedPath = new PathString("/Account/Forbidden/"),
-                AutomaticAuthenticate = true,
-                AutomaticChallenge = true
-            });
+            //app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            //{
+            //    //AuthenticationScheme = "MyApplicationAuth",
+            //    LoginPath = new PathString("/Account/Login/"),
+            //    AccessDeniedPath = new PathString("/Account/Forbidden/")
+            //    //AutomaticAuthenticate = true,
+            //   // AutomaticChallenge = true
+            //});
 
             app.UseMvcWithDefaultRoute();
 

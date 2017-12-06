@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using System.IO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Razor.Chunks.Generators;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using WebCore.Models;
 
 namespace WebCore.Controllers
@@ -29,12 +24,7 @@ namespace WebCore.Controllers
         {
             return View();
         }
-
-        public ViewResult list()
-        {
-            return View();
-        }
-
+     
         public ViewResult About()
         {            
             ViewBag.Message = "My personal ViewBag message";
@@ -109,6 +99,22 @@ namespace WebCore.Controllers
             Debug.WriteLine($"Unprotect returned: {unprotectedPayload}");
 
             return unprotectedPayload;
+        }
+
+
+        /// <summary>
+        /// Esempio di Binder automatico di una striga in base64 a un bytes[] utilizzando la classe ByteArrayModelBinder
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="filename"></param>
+        [Route("api/image")]
+        [HttpPost]
+        public void Post([ModelBinder(BinderType = typeof(ByteArrayModelBinder))]byte[] file, string filename)
+        {
+            Debug.WriteLine(file.Length);
+            string filePath = Path.Combine(@"C:\temp", filename);
+            if (System.IO.File.Exists(filePath)) return;
+            System.IO.File.WriteAllBytes(filePath, file);
         }
     }
 }
