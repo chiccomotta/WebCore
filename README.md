@@ -11,3 +11,4 @@ Progetto ASP.NET Core 2.0 utilizzato per il corso ASP.NET CORE. Sono presenti di
   - IOptions
   - Razor syntax
   - IDataProtection
+  - ByteArraModelBinder
