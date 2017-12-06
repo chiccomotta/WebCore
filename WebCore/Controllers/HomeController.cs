@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
+using WebCore.Filters;
 using WebCore.Models;
 
 namespace WebCore.Controllers
@@ -87,6 +88,7 @@ namespace WebCore.Controllers
         }
 
         [Route("api/post")]
+        //[KindValidator]   // Filter attribute
         [HttpPost]
         public string post([FromBody]Customer customer)
         {
