@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.IO;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.DataProtection;
+using WebCore.ModelBinders;
 using WebCore.Models;
 using WebCore.Services;
 
@@ -40,7 +41,7 @@ namespace WebCore
 
             //Configure Option using Extensions method  
             services.Configure<ConnectionString>(Configuration.GetSection("ConnectionString"));
-            
+
             //Configure Option using Extensions method  
             services.Configure<RemoteCredentials>(Configuration.GetSection("RemoteCredentials"));
 
@@ -54,7 +55,7 @@ namespace WebCore
 
             // Add framework services.
             services.AddMvc();
-            
+
             services.AddDistributedMemoryCache();
 
             services.AddSession(options =>
@@ -65,9 +66,14 @@ namespace WebCore
             });
 
             var debug_string = Configuration["MasterKeyShare"];
-            
+
             services.AddDataProtection()
                 .PersistKeysToFileSystem(new DirectoryInfo(Configuration["MasterKeyShare"]));
+
+            // CUSTOM MODEL BINDER
+            services.AddMvc(config =>
+                config.ModelBinderProviders.Insert(0, new StringArrayModelBinderProvider())
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

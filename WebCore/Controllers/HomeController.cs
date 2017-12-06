@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
+using Newtonsoft.Json;
 using WebCore.Filters;
 using WebCore.Models;
 
@@ -117,6 +118,18 @@ namespace WebCore.Controllers
             string filePath = Path.Combine(@"C:\temp", filename);
             if (System.IO.File.Exists(filePath)) return;
             System.IO.File.WriteAllBytes(filePath, file);
+        }
+
+
+        [HttpGet("api/binder")]
+        public string Get(StringArrayModel viewModel)
+        {
+            if (viewModel == null)
+                return "Woops. We received null!";
+
+            Debug.WriteLine(viewModel.ValuesList.Length);
+
+            return $"data model: {JsonConvert.SerializeObject(viewModel.ValuesList)}";
         }
     }
 }
