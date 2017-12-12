@@ -149,8 +149,9 @@ namespace WebCore.Controllers
         [HttpPost("api/bucket")]
         public IActionResult PostBucket([FromBody]DataBucket<JObject> viewModel)
         {
+            // IT WORKS!
             Debug.WriteLine(viewModel);
-
+            
             JObject jobj = viewModel.Data as JObject;
 
             var customer = jobj.ToObject<Customer>();
