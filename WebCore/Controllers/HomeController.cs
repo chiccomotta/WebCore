@@ -15,14 +15,12 @@ namespace WebCore.Controllers
 {
     public class HomeController : Controller
     {
-
         protected readonly IDataProtector protector;
 
         public HomeController(IDataProtectionProvider provider)
         {
             protector = provider.CreateProtector("WebCore.HomeController.v1");
         }
-
         
         public ViewResult Index()
         {
