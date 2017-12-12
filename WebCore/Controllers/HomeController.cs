@@ -149,9 +149,20 @@ namespace WebCore.Controllers
         [HttpPost("api/bucket")]
         public IActionResult PostBucket([FromBody]DataBucket<JObject> viewModel)
         {
-            // IT WORKS!
-            Debug.WriteLine(viewModel);
-            
+            /***
+             * 
+             * JObject rappresenta un oggetto json qualunque passato dal client, es:
+                    
+                var json = 
+                {
+                    "name": "My DataBucket",
+                    "data": {
+                        "name": "Cristiano",
+                        "codice": 111
+                    }
+                }
+            */
+                                    
             JObject jobj = viewModel.Data as JObject;
 
             var customer = jobj.ToObject<Customer>();
