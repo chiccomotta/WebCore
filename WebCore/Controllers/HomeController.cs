@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using WebCore.Filters;
 using WebCore.Models;
 
@@ -131,5 +133,29 @@ namespace WebCore.Controllers
 
             return $"data model: {JsonConvert.SerializeObject(viewModel.ValuesList)}";
         }
+
+        [HttpGet("api/bucket")]
+        public IActionResult GetBucket(DataBucket<Customer> viewModel)
+        {
+            var result = new DataBucket<Customer>()
+            {
+                Nome = "My DataBucket",
+                Data = new Customer() {Name = "Cristiano", Codice = 111}
+            };
+
+            return Ok(result);
+        }
+
+        [HttpPost("api/bucket")]
+        public IActionResult PostBucket([FromBody]DataBucket<JObject> viewModel)
+        {
+            Debug.WriteLine(viewModel);
+
+            JObject jobj = viewModel.Data as JObject;
+
+            var customer = jobj.ToObject<Customer>();
+            return Ok(customer);
+        }
+
     }
 }
