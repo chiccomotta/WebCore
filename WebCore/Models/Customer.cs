@@ -1,4 +1,4 @@
-﻿namespace WebCore.Controllers
+﻿namespace WebCore.Models
 {
     public class Customer
     {

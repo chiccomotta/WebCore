@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WebCore.Filters;
+using WebCore.ModelBinders;
 using WebCore.Models;
+using WebCore.Services;
 
 namespace WebCore.Controllers
 {
@@ -167,5 +169,11 @@ namespace WebCore.Controllers
             return Ok(customer);
         }
 
+
+        [HttpPost("api/customer/{id}")]
+        public IActionResult Test([ModelBinder(typeof(AlbumModelBinder))] MusicAlbum model)
+        {
+            return Ok(model);
+        }
     }
 }
