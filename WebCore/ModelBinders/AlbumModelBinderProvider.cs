@@ -6,16 +6,16 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace WebCore.ModelBinders
 {
-    public class AlbumModelBinderProvider : IModelBinderProvider
-    {
-        public IModelBinder GetBinder(ModelBinderProviderContext context)
-        {
-            if(context == null) throw new ArgumentNullException(nameof(context));
+    //public class AlbumModelBinderProvider : IModelBinderProvider
+    //{
+    //    public IModelBinder GetBinder(ModelBinderProviderContext context)
+    //    {
+    //        if(context == null) throw new ArgumentNullException(nameof(context));
 
-            if (context.Metadata.ModelType == typeof(AlbumModelBinder))
-                return new AlbumModelBinder();
+    //        if (context.Metadata.ModelType == typeof(AlbumModelBinder))
+    //            return new AlbumModelBinder();
 
-            return null;
-        }
-    }
+    //        return null;
+    //    }
+    //}
 }
