@@ -1,11 +1,14 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using WebCore.Filters;
 using WebCore.Models;
 
@@ -131,5 +134,37 @@ namespace WebCore.Controllers
 
             return $"data model: {JsonConvert.SerializeObject(viewModel.ValuesList)}";
         }
+
+        [Route("api/validate")]
+        [HttpPost]
+        public IActionResult Post([FromBody]JObject model)
+        {
+            // Lista degli eventuali errori di validazione del modello
+            List<string> errorList = new List<string>();
+
+            JsonConvert.DeserializeObject(model.ToString(), typeof(Person)
+                , new JsonSerializerSettings
+                {
+                    MissingMemberHandling = MissingMemberHandling.Error,
+                    Error = (sender, args) =>
+                    {
+                        var currentError = args.ErrorContext.Error.Message;
+                        args.ErrorContext.Handled = true;
+
+                        errorList.Add(currentError);
+                    }
+                });
+
+            // Ci sono errori
+            if (errorList.Any())
+            {
+                string description = string.Join("[ERR]: ", errorList.ToArray())
+                    .Insert(0, "La struttura dei dati non è conforme al modello dati del DataBucket. [ERR]: ");
+
+                return new BadRequestObjectResult(description);
+            }
+
+            return new JsonResult(model);
+        }        
     }
 }
