@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
@@ -10,20 +9,20 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WebCore.Filters;
+using WebCore.ModelBinders;
 using WebCore.Models;
+using WebCore.Services;
 
 namespace WebCore.Controllers
 {
     public class HomeController : Controller
     {
-
         protected readonly IDataProtector protector;
 
         public HomeController(IDataProtectionProvider provider)
         {
             protector = provider.CreateProtector("WebCore.HomeController.v1");
         }
-
         
         public ViewResult Index()
         {
