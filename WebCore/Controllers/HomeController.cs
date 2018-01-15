@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -92,10 +93,12 @@ namespace WebCore.Controllers
         }
 
         [Route("api/post")]
-        //[KindValidator]   // Filter attribute
         [HttpPost]
-        public string post([FromBody]Customer customer)
+        public IActionResult Post([FromBody]Customer customer)
         {
+            if (!ModelState.IsValid)
+                return new JsonResult("Data model not valid");
+           
             // protect the payload
             string protectedPayload = protector.Protect("ciccio");
             Debug.WriteLine($"Protect returned: {protectedPayload}");
@@ -104,7 +107,7 @@ namespace WebCore.Controllers
             string unprotectedPayload = protector.Unprotect(protectedPayload);
             Debug.WriteLine($"Unprotect returned: {unprotectedPayload}");
 
-            return unprotectedPayload;
+            return new JsonResult(unprotectedPayload);
         }
 
 
