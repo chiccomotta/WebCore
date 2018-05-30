@@ -21,6 +21,8 @@ namespace WebCore
 {
     public class Startup
     {
+        protected readonly IHostingEnvironment environment;
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -29,8 +31,8 @@ namespace WebCore
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
-            
-            Debug.WriteLine($"DEBUG: {Configuration["Developer:Name"]}");
+
+            this.environment = env;
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -79,10 +81,13 @@ namespace WebCore
                 config.ModelBinderProviders.Insert(0, new StringArrayModelBinderProvider())
             );
 
-            services.Configure<MvcOptions>(options =>
+            if (environment.IsProduction())
             {
-                options.Filters.Add(new RequireHttpsAttribute());
-            });
+                services.Configure<MvcOptions>(options =>
+                {
+                    options.Filters.Add(new RequireHttpsAttribute());
+                });
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -118,8 +123,11 @@ namespace WebCore
             //    // non chiamo il metodo next per cui ho finito la pipeline e torno indietro
             //});
 
-            var options = new RewriteOptions().AddRedirectToHttps();
-            app.UseRewriter(options);
+            if (env.IsProduction())
+            {
+                var options = new RewriteOptions().AddRedirectToHttps();
+                app.UseRewriter(options);
+            }
 
             app.UseSession();
 
