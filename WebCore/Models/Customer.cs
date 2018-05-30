@@ -7,5 +7,6 @@ namespace WebCore.Models
         [Required(AllowEmptyStrings = false)]
         public string Name { get; set; }
         public int Codice { get; set; }
+        public string Numero { get; set; }
     }
 }

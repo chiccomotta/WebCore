@@ -12,6 +12,10 @@ using Microsoft.AspNetCore.DataProtection;
 using WebCore.ModelBinders;
 using WebCore.Models;
 using WebCore.Services;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace WebCore
 {
@@ -74,6 +78,11 @@ namespace WebCore
             services.AddMvc(config =>
                 config.ModelBinderProviders.Insert(0, new StringArrayModelBinderProvider())
             );
+
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new RequireHttpsAttribute());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -108,6 +117,10 @@ namespace WebCore
             //    await context.Response.WriteAsync("Sono il II custom Middleware");
             //    // non chiamo il metodo next per cui ho finito la pipeline e torno indietro
             //});
+
+            var options = new RewriteOptions().AddRedirectToHttps();
+            app.UseRewriter(options);
+
             app.UseSession();
 
             Debug.WriteLine(Configuration["Developer:Name"]);
@@ -139,7 +152,7 @@ namespace WebCore
             //});
 
             app.UseMvcWithDefaultRoute();
-
+            
             /*******************************************
             -    Definizione di route (nuova sintassi)
             //*******************************************/

@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
@@ -94,10 +95,18 @@ namespace WebCore.Controllers
 
         [Route("api/post")]
         [HttpPost]
-        public IActionResult Post([FromBody]Customer customer)
+        public IActionResult Post([FromBody]Customer customer)  
         {
             if (!ModelState.IsValid)
                 return new JsonResult("Data model not valid");
+
+            CustomerValidator validator = new CustomerValidator();
+            ValidationResult results = validator.Validate(customer);
+
+            bool validationSucceeded = results.IsValid;
+            IList<ValidationFailure> failures = results.Errors;
+
+            Debug.WriteLine(ModelState.Values);
            
             // protect the payload
             string protectedPayload = protector.Protect("ciccio");
