@@ -2,11 +2,6 @@
 
 namespace WebCore.Services
 {
-    public interface IMemoryCacheService
-    {
-        string GetName();
-    }
-
     public class MemoryCacheService : IMemoryCacheService
     {
         private readonly IMemoryCache MemoryCache;
