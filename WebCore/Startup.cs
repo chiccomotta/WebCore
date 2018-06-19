@@ -62,7 +62,11 @@ namespace WebCore
             // Add framework services.
             services.AddMvc();
 
-            services.AddDistributedMemoryCache();
+            //services.AddDistributedMemoryCache();
+            services.AddMemoryCache();
+
+            // Aggiungo il servizio MemoryCacheService
+            services.AddSingleton<IMemoryCacheService, MemoryCacheService>();
 
             services.AddSession(options =>
             {

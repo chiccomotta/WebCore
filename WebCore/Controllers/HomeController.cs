@@ -21,10 +21,12 @@ namespace WebCore.Controllers
     public class HomeController : Controller
     {
         protected readonly IDataProtector protector;
+        protected readonly IMemoryCacheService MemoryCacheService;
 
-        public HomeController(IDataProtectionProvider provider)
+        public HomeController(IDataProtectionProvider provider, IMemoryCacheService cache)
         {
             protector = provider.CreateProtector("WebCore.HomeController.v1");
+            MemoryCacheService = cache;
         }
         
         public ViewResult Index()
@@ -71,6 +73,15 @@ namespace WebCore.Controllers
             ViewData["id"] = RouteData.Values["id"].ToString();
             return View();
         }
+
+
+        public IActionResult TestMemory()
+        {
+            var name = MemoryCacheService.GetName();
+            return new JsonResult(name);
+        }
+
+
 
         [HttpGet]
         [Route("api/ApiTest")]
