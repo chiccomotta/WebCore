@@ -13,3 +13,4 @@ Progetto ASP.NET Core 2.0 utilizzato per il corso ASP.NET CORE. Sono presenti di
   - IDataProtection
   - ByteArraModelBinder
   - HTTPS Redirect
+  - MemoryCache
