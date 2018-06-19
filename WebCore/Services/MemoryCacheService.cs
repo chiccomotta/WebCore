@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Caching.Memory;
-using NuGet.Frameworks;
+﻿using Microsoft.Extensions.Caching.Memory;
 
 namespace WebCore.Services
 {
-
     public interface IMemoryCacheService
     {
         string GetName();
     }
-
 
     public class MemoryCacheService : IMemoryCacheService
     {
