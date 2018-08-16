@@ -92,6 +92,16 @@ namespace WebCore
                     options.Filters.Add(new RequireHttpsAttribute());
                 });
             }
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -126,6 +136,8 @@ namespace WebCore
             //    await context.Response.WriteAsync("Sono il II custom Middleware");
             //    // non chiamo il metodo next per cui ho finito la pipeline e torno indietro
             //});
+
+            app.UseCors("CorsPolicy");
 
             if (env.IsProduction())
             {

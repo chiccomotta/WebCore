@@ -55,7 +55,7 @@ namespace WebCore.Controllers
             return View();
         }
 
-        [Authorize]
+        //[Authorize]
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
@@ -81,7 +81,12 @@ namespace WebCore.Controllers
             return new JsonResult(name);
         }
 
-
+        [HttpGet]
+        [Route("api/testapi")]
+        public string TestApi()
+        {
+            return "This is a test API";
+        }
 
         [HttpGet]
         [Route("api/ApiTest")]
