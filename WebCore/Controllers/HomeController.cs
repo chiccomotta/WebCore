@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -91,9 +92,12 @@ namespace WebCore.Controllers
             await Task.Delay(2000);
 
             if (cancellationToken.IsCancellationRequested)
+            {
+                Debug.WriteLine("Request cancelled!");
                 return "Request cancelled!";
-            //cancellationToken.ThrowIfCancellationRequested();
+            }
 
+            //cancellationToken.ThrowIfCancellationRequested();
             return "This is a test API";
         }
 
