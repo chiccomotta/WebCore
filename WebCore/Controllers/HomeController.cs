@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
@@ -81,10 +83,17 @@ namespace WebCore.Controllers
             return new JsonResult(name);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("api/testapi")]
-        public string TestApi()
+        public async Task<string> TestApi([FromBody] User user, CancellationToken cancellationToken)
         {
+            CancellationToken token = HttpContext.RequestAborted;
+            await Task.Delay(2000);
+
+            if (cancellationToken.IsCancellationRequested)
+                return "Request cancelled!";
+            //cancellationToken.ThrowIfCancellationRequested();
+
             return "This is a test API";
         }
 
