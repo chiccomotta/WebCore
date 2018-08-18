@@ -14,3 +14,4 @@ Progetto ASP.NET Core 2.0 utilizzato per il corso ASP.NET CORE. Sono presenti di
   - ByteArraModelBinder
   - HTTPS Redirect
   - MemoryCache
+  - CancellationToken (works only in Kestrel, not IIS Express)
