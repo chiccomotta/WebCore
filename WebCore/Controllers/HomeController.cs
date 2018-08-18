@@ -88,13 +88,26 @@ namespace WebCore.Controllers
         [Route("api/testapi")]
         public async Task<string> TestApi([FromBody] User user, CancellationToken cancellationToken)
         {
-            CancellationToken token = HttpContext.RequestAborted;
-            await Task.Delay(2000);
+            //CancellationToken token = HttpContext.RequestAborted;
+            try
+            {
+                // Passo il token di cancellazione al metodo per annullarlo; viene sollevata un'eccezione di tipo
+                // TaskCanceledException (eredita da OperationCanceledException)
+                await Task.Delay(4000, cancellationToken);
+            }
+            catch (TaskCanceledException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            catch (OperationCanceledException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
 
             if (cancellationToken.IsCancellationRequested)
             {
                 Debug.WriteLine("Request cancelled!");
-                return "Request cancelled!";
+                return string.Empty;
             }
 
             //cancellationToken.ThrowIfCancellationRequested();
