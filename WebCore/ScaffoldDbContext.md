@@ -1,6 +1,7 @@
 # Scaffold-DbContext #
 Per generare le classi .cs di entità da un database aprire la *Package Manager Console*, 
-impostare come Default Project il progetto al quale si vuole aggiungere le classi e inserire il seguente comando (ovviamente specificando la Connection String adeguata):
+impostare come Default Project il progetto al quale si vuole aggiungere le classi e 
+inserire il seguente comando (ovviamente specificando la Connection String adeguata):
 
 ``
 Scaffold-DbContext "Server=MyServer;Database=myDB;Trusted_Connection=True;Application Name=A" Microsoft.EntityFrameworkCore.SqlServer
